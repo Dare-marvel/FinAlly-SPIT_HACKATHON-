@@ -6,7 +6,6 @@ const blogSchema = new mongoose.Schema({
   },
   youtubeLink: {
     type: String,
-
   },
   content: {
     type: String,

@@ -10,8 +10,6 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 // import Logout from './components/Logout';
 import NotFound from "./components/NotFound";
-import Admin from "./components/Admin";
-import AdminLogin from "./components/AdminLogin";
 import Navbar from "./components/Navbar";
 import Navbar2 from "./components/Navbar2";
 import Navbar3 from "./components/Navbar3";
@@ -50,15 +48,11 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login details={{ setRole }} />} />
             <Route path="/signup" element={<Signup />} />
-            <Route
-              path="/admin"
-              element={<AdminLogin details={{ setRole }} />}
-            />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </>
       )}
-      {role === "company" && (
+      {role === "user" && (
         <>
           <Navbar details={{ role, setRole }} />
           <Routes>
@@ -67,23 +61,10 @@ function App() {
           </Routes>
         </>
       )}
-      {role === "vendor" && (
+      {role === "bank" && (
         <>
           <Navbar details={{ role, setRole }} />
           <Routes>
-            <Route path="/marketplace" element={<Marketplace />} />
-            <Route path="/profile" element={< Profile/>} />
-            <Route path='/search/:id' element={<SearchResult />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </>
-      )}
-
-      {role === "admin" && (
-        <>
-          <Navbar3 details={{ setRole }} />
-          <Routes>
-            <Route exact path="/" element={<Admin details={{ role }}/>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </>

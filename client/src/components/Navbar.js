@@ -43,9 +43,9 @@ const Navbar = (props) => {
   const logout = async () => {
     let confirmLogout = window.confirm("Are you sure, you want to log out?");
     if (confirmLogout) {
-      if (role === "vendor") {
+      if (role === "bank") {
         try {
-          const res = await axios.post("/vendorlogout", {
+          const res = await axios.post("/banklogout", {
             withCredentials: true,
           });
 
@@ -61,9 +61,9 @@ const Navbar = (props) => {
             toast.error("Some error occured");
           }
         }
-      } else if (role === "company") {
+      } else if (role === "user") {
         try {
-          const res = await axios.post("/companylogout", {
+          const res = await axios.post("/userlogout", {
             withCredentials: true,
           });
 
@@ -162,7 +162,7 @@ const Navbar = (props) => {
               </div>
             </NavLink>
 
-            {role === "vendor" ? (
+            {role === "bank" ? (
               <NavLink
                 to="/marketplace"
                 style={({ isActive }) => ({

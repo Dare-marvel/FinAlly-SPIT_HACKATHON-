@@ -73,15 +73,15 @@ const Login = (props) => {
   const loginForm = async (event) => {
     event.preventDefault();
     const { role } = event.target;
-    if (role.value === "company") {
+    if (role.value === "user") {
       try {
-        const res = await axios.post("/companysignin", userData);
+        const res = await axios.post("/usersignin", userData);
         if (res.status !== 200) {
           toast.error(res.data.msg);
         } else {
           toast.success(res.data.msg);
           const { setRole } = props.details;
-          setRole("company");
+          setRole("user");
           navigate("/codb");
         }
       } catch (error) {
@@ -91,15 +91,15 @@ const Login = (props) => {
           toast.error("Some error occured");
         }
       }
-    } else if (role.value === "vendor") {
+    } else if (role.value === "bank") {
       try {
-        const res = await axios.post("/vendorsignin", userData);
+        const res = await axios.post("/banksignin", userData);
         if (res.status !== 200) {
           toast.error(res.data.msg);
         } else {
           toast.success(res.data.msg);
           const { setRole } = props.details;
-          setRole("vendor");
+          setRole("bank");
           navigate("/codb");
         }
       } catch (error) {
@@ -120,9 +120,9 @@ const Login = (props) => {
     });
     // setTimeout(() => {
     // }, 2000);-
-    if (role.value === "company") {
+    if (role.value === "user") {
       try {
-        const res = await axios.post("/companyregister", userDataSignUp);
+        const res = await axios.post("/userregister", userDataSignUp);
 
         if (res.status === 200) {
           toast.success("User registered successfully");
@@ -138,9 +138,9 @@ const Login = (props) => {
           toast.error("Some error occured");
         }
       }
-    } else if (role.value === "vendor") {
+    } else if (role.value === "bank") {
       try {
-        const res = await axios.post("/vendorregister", userDataSignUp);
+        const res = await axios.post("/bankregister", userDataSignUp);
 
         if (res.status === 200) {
           toast.success("User registered successfully");
@@ -206,18 +206,18 @@ const Login = (props) => {
                     type="radio"
                     name="role"
                     id="register-checkbox-11"
-                    value="company"
+                    value="user"
                   />
-                  <label htmlFor="register-checkbox-11">Company</label>
+                  <label htmlFor="register-checkbox-11">User</label>
                 </span>
                 <span>
                   <input
                     type="radio"
                     name="role"
                     id="register-checkbox-22"
-                    value="vendor"
+                    value="bank"
                   />
-                  <label htmlFor="register-checkbox-22">Vendor</label>
+                  <label htmlFor="register-checkbox-22">bank</label>
                 </span>
               </div>
               <button type="submit" value="Login" className="btn123">
@@ -334,7 +334,7 @@ const Login = (props) => {
                     type="radio"
                     name="role"
                     id="register-checkbox-1"
-                    value="company"
+                    value="user"
                     onChange={(e)=>{
                       setUserDataSignUp({
                         ...userDataSignUp,
@@ -342,14 +342,14 @@ const Login = (props) => {
                       });
                     }}
                   />
-                  <label htmlFor="register-checkbox-1">Company</label>
+                  <label htmlFor="register-checkbox-1">User</label>
                 </span>
                 <span>
                   <input
                     type="radio"
                     name="role"
                     id="register-checkbox-2"
-                    value="vendor"
+                    value="bank"
                     onChange={(e)=>{
                       setUserDataSignUp({
                         ...userDataSignUp,
@@ -357,7 +357,7 @@ const Login = (props) => {
                       });
                     }}
                   />
-                  <label htmlFor="register-checkbox-2">Vendor</label>
+                  <label htmlFor="register-checkbox-2">bank</label>
                 </span>
               </div>
               <button type="submit" value="Sign up" className="btn123">

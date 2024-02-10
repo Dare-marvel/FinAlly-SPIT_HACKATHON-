@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
-const Vendor = require("../models/Vendor");
+const Bank = require("../models/Bank");
 const Profile = require("../models/Profile");
 const ContactForm = require("../models/Contact");
 const Order = require("../models/Order");
@@ -10,7 +10,7 @@ const vendorAuthenticate = require("../middleware/vendorAuthenticate");
 const authenticateContact = require("../middleware/authenticateContact");
 const cookieParser = require("cookie-parser");
 const PriceModel = require("../models/PricesModel");
-const Company = require("../models/Company");
+// const User = require("../models/User");
 const Dashboard = require("../models/Dashboard");
 const cheerio = require('cheerio');
 const axios = require('axios');
@@ -38,44 +38,44 @@ router.post("/getFilteredCompanies", async (req, res) => {
   }
 });
 
-router.post("/vendorregister", async (req, res) => {
+router.post("/bankregister", async (req, res) => {
   const { name, email, phone, role, password, cpassword } = req.body;
   if (!name || !email || !phone || !role || !password || !cpassword) {
     return res.status(422).json({ error: "All fields need to be filled" });
   }
 
   try {
-    const vendorExist = await Vendor.findOne({ email: email });
-    if (vendorExist) {
+    const bankExist = await Bank.findOne({ email: email });
+    if (bankExist) {
       return res.status(409).json({ error: "Email already registered" });
     } else if (password != cpassword) {
       return res.status(422).json({ error: "Passwords do not match" });
     }
-    const ven = new Vendor({ name, email, phone, password, cpassword });
-    await ven.save();
+    const newbank = new Bank({ name, email, phone, password, cpassword });
+    await newbank.save();
     const pro = new Profile({ name: name, email: email, phone: phone, Grole: role })
     await pro.save()
-    return res.status(200).json({ msg: "Vendor registered successfully" });
+    return res.status(200).json({ msg: "Bank registered successfully" });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: "Some unexpected error occured" });
   }
 });
 
-router.post("/vendorsignin", async (req, res) => {
+router.post("/banksignin", async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
     return res.status(400).json({ error: "Please fill all required fields" });
   }
   try {
-    const emailExist = await Vendor.findOne({ email: email });
+    const emailExist = await Bank.findOne({ email: email });
     if (emailExist) {
       const isMatch = await bcrypt.compare(password, emailExist.password);
       if (isMatch) {
         token = await emailExist.generateAuthToken();
         res.cookie(
           "inv_man",
-          { token, role: "vendor", email: email },
+          { token, role: "bank", email: email },
           {
             expires: new Date(Date.now() + 604800),
             httpOnly: true,

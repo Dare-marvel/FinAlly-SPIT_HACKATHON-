@@ -4,13 +4,13 @@ const bcrypt = require("bcryptjs");
 const companyAuthenticate = require("../middleware/companyAuthenticate");
 const cookieParser = require("cookie-parser");
 router.use(cookieParser());
-const Company = require("../models/Company");
-const Vendor = require("../models/Vendor");
+const User = require("../models/User");
+const Vendor = require("../models/Bank");
 const Dashboard = require("../models/Dashboard");
 const Order = require("../models/Order");
 const Profile = require("../models/Profile");
 
-router.post("/companyregister", async (req, res) => {
+router.post("/userregister", async (req, res) => {
   const { name, email, phone, role, password, cpassword } = req.body;
 
   if (!name || !email || !phone || !role || !password || !cpassword) {
@@ -18,38 +18,38 @@ router.post("/companyregister", async (req, res) => {
   }
 
   try {
-    const companyExist = await Company.findOne({ email: email });
-    if (companyExist) {
+    const UserExist = await User.findOne({ email: email });
+    if (UserExist) {
       return res.status(409).json({ error: "Email already registered" });
     } else if (password != cpassword) {
       return res.status(422).json({ error: "Passwords do not match" });
     }
 
-    const comp = new Company({ name, email, phone, password, cpassword });
+    const comp = new User({ name, email, phone, password, cpassword });
     await comp.save();
     const pro = new Profile({ name: name, email: email, phone: phone, Grole: role })
     await pro.save()
-    return res.status(200).json({ msg: "Company registered successfully" });
+    return res.status(200).json({ msg: "User registered successfully" });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: "Some unexpected error occured" });
   }
 });
 
-router.post("/companysignin", async (req, res) => {
+router.post("/usersignin", async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
     return res.status(400).json({ error: "Please fill all required fields" });
   }
   try {
-    const emailExist = await Company.findOne({ email: email });
+    const emailExist = await User.findOne({ email: email });
     if (emailExist) {
       const isMatch = await bcrypt.compare(password, emailExist.password);
       if (isMatch) {
         token = await emailExist.generateAuthToken();
         res.cookie(
           "inv_man",
-          { token, role: "company", email: email },
+          { token, role: "user", email: email },
           {
             expires: new Date(Date.now() + 604800),
             httpOnly: true,
@@ -85,10 +85,10 @@ router.post("/addproducts_c", async (req, res) => {
   }
 
   try {
-    const company = await Company.findOne({ email: email });
+    const user = await User.findOne({ email: email });
 
-    if (!company) {
-      return res.status(400).json({ error: "Company not found" });
+    if (!user) {
+      return res.status(400).json({ error: "User not found" });
     }
     const newProduct = {
       name: name,
@@ -100,7 +100,7 @@ router.post("/addproducts_c", async (req, res) => {
       s_price: s_price,
       c_price: c_price,
     };
-    company.products.push(newProduct); // Use push to add a newProduct to the products array
+    user.products.push(newProduct); // Use push to add a newProduct to the products array
     await company.save(); // Save the updated vendor document
 
     return res.status(201).json({ message: "Product added successfully" });

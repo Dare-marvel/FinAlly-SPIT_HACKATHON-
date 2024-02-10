@@ -5,46 +5,90 @@ const jwt = require('jsonwebtoken');
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        
     },
     email: {
         type: String,
-        required: true
+        
     },
     phone: {
         type: Number,
-        required: true
+        
     },
     password: {
         type: String,
-        required: true
+        
     },
     confirmPassword: {
         type: String,
-        required: true
+        
+    },
+    pic: {
+        type: String,
+        default:
+            "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+    },
+    Grole: {
+        type: String
     },
     tokens: [
         {
-            token:{
-                type:String,
-                required: true
+            token: {
+                type: String,
+                
             }
         }
-    ]
-})
+    ],
+    bank_account: {
+        acc_name: String,
+        acc_id: String,
+        bank_name: String,
+        balance_amt: Number, 
+    },
+    walletamt: {
+        type: Number,
+    }
+    ,
+    sip: {
+        amt: Number,
+        streak: Number,
+        
+    },
+    points: {
+        type: Number,
+        
+    }
+}
+);
 
-userSchema.pre('save', async function(next){
-    if(this.isModified('password')){
+// BANK ACC
+// bank acc name
+// bank acc id
+// balance amt
+
+// walletamt
+
+
+
+// SIP
+  // amt
+  // streak
+  // when the sip amt is refunded the streak is set back to 0
+
+// POINTS
+
+userSchema.pre('save', async function (next) {
+    if (this.isModified('password')) {
         this.password = await bcrypt.hash(this.password, 10);
         this.confirmPassword = await bcrypt.hash(this.confirmPassword, 10);
     }
     next();
 })
 
-userSchema.methods.generateAuthToken = async function(){
+userSchema.methods.generateAuthToken = async function () {
     try {
-        const token = jwt.sign({_id: this._id}, process.env.SECRET_KEY);
-        this.tokens = this.tokens.concat({token: token});
+        const token = jwt.sign({ _id: this._id }, process.env.SECRET_KEY);
+        this.tokens = this.tokens.concat({ token: token });
         await this.save();
         return token;
     } catch (error) {

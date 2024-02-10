@@ -2,14 +2,13 @@ const mongoose = require('mongoose');
 
 const mcqSchema = new mongoose.Schema({
 
-    tests:[
+    topicwise_tests:[
         {
             topic: {
                 type: String,
                 required: true
             },
             test:[
-            [
                 {
                     q_no:{
                         type: Number,
@@ -23,12 +22,16 @@ const mcqSchema = new mongoose.Schema({
                         type: Array,
                         required: true
                     },
-                    answer: {
-                        type: String,
+                    user_ans:{
+                        type: Number,
+                        required: true,
+                        default: -1
+                    },
+                    correct_answer: {
+                        type: Number,
                         required: true
                     } 
-                },
-            ],        
+                },      
             ],
             
         }

@@ -23,11 +23,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         
     },
-    pic: {
-        type: String,
-        default:
-            "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
-    },
     Grole: {
         type: String
     },
@@ -40,24 +35,51 @@ const userSchema = new mongoose.Schema({
         }
     ],
     bank_account: {
-        acc_name: String,
-        acc_id: String,
-        bank_name: String,
-        balance_amt: Number, 
+        acc_id: {
+            type: Number,
+            default: 1234567890
+        },
+        bank_name: {
+            type: String,
+            default: "HDFC Bank"
+        },
+        balance_amt: {
+            type: Number,
+            default: 20000
+        }
     },
     walletamt: {
         type: Number,
+        default : 0
     }
     ,
     sip: {
-        amt: Number,
-        streak: Number,
-        
+        amt: {
+            type: Number,
+            default: 0
+        },
+        streak : {
+            type: Number,
+            default: 0
+        }
     },
     points: {
         type: Number,
-        
-    }
+        default: 0
+    },
+    transactions: [
+        {
+            type : {
+                type: String,
+            },
+            amt: {
+                type: Number,
+            },
+            date: {
+                type: Date,
+            },
+        }
+    ]
 }
 );
 

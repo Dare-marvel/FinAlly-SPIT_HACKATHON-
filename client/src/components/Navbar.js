@@ -86,7 +86,7 @@ const Navbar = (props) => {
     <>
       <div className="hero" ref={menuRef}>
         <div className="logo">
-          <NavLink to="/codb">
+          <NavLink to="/dbne">
             {" "}
             <div>
               <img
@@ -104,7 +104,7 @@ const Navbar = (props) => {
         <div className={showMediaIcons ? "inmobileview itemlist" : "itemlist"}>
           <ul className="List">
             <NavLink
-              to="/codb"
+              to="/dbne"
               style={({ isActive }) => ({
                 color: isActive ? "#466bda" : "#545e6f",
                 textDecoration: "none",

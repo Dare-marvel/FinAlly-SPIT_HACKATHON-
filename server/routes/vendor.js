@@ -651,7 +651,7 @@ router.get("/orders_v", async (req, res) => {
       if (req.cookies.inv_man.role) {
         email = req.cookies.inv_man.email;
       }
-    } else {
+    } else { 
       return res.status(500).json({ error: "Please login to continue" });
     }
   } else {

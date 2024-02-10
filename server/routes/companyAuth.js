@@ -712,7 +712,26 @@ router.get('/getblogs', async (req, res) => {
   }
 });
 
+router.post('/getbadgegrade', (req, res) => {
+  const { points } = req.body;
+  let grade;
 
+  if (points > 10000) {
+    grade = 5; // Platinum Badge
+  } else if (points > 3000) {
+    grade = 4; // Gold Badge
+  } else if (points > 1500) {
+    grade = 3; // Silver Badge
+  } else if (points > 500) {
+    grade = 2; // Bronze Badge
+  } else if (points > 100) {
+    grade = 1; // Beginner Badge
+  } else {
+    grade = 0; // No Badge
+  }
+
+  res.json({ grade });
+});
 module.exports = router;
 
 

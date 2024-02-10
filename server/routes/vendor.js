@@ -632,7 +632,7 @@ router.get("/profile", async (req, res) => {
   }
 
   try {
-    const user = await Profile.findOne({ email: email })
+    const user = await User.findOne({ email: email })
     if (!user) {
       return res.status(400).json({ error: "User not found" });
     }

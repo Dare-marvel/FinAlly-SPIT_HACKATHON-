@@ -9,6 +9,8 @@ const Vendor = require("../models/Bank");
 const Dashboard = require("../models/Dashboard");
 const Order = require("../models/Order");
 const Profile = require("../models/Profile");
+const Mcqs = require("../models/Mcq");
+
 router.post("/userregister", async (req, res) => {
   const { name, email, phone, role, password, cpassword } = req.body;
 

@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import { useState } from "react";
-import companyLogo from "../assets/logo.png";
+import companyLogo from "../assets/FinAlly_icon.png";
 import signin from "../assets/signin.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useEffect } from "react";
@@ -133,6 +133,93 @@ const Navbar = (props) => {
               </div>
             </NavLink>
             <NavLink
+              to="/Blogs"
+              style={({ isActive }) => ({
+                color: isActive ? "#466bda" : "#545e6f",
+                textDecoration: "none",
+                fontWeight: "500",
+                // background: isActive ? '#7600dc' : '#f0f0f0',
+              })}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: window.innerWidth <= 768 ? "row" : "column",
+                  alignItems: "center",
+                }}
+              >
+                <FontAwesomeIcon icon={faBox} />
+                <li
+                  className="listItem"
+                  onClick={() => setShowMediaIcons(false)}
+                  style={{
+                    fontWeight: "600",
+                    marginLeft: window.innerWidth <= 768 ? "10px" : "0px",
+                  }}
+                >
+                  Learn
+                </li>
+              </div>
+            </NavLink>
+            <NavLink
+              to="/MCQ"
+              style={({ isActive }) => ({
+                color: isActive ? "#466bda" : "#545e6f",
+                textDecoration: "none",
+                fontWeight: "500",
+                // background: isActive ? '#7600dc' : '#f0f0f0',
+              })}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: window.innerWidth <= 768 ? "row" : "column",
+                  alignItems: "center",
+                }}
+              >
+                <FontAwesomeIcon icon={faBox} />
+                <li
+                  className="listItem"
+                  onClick={() => setShowMediaIcons(false)}
+                  style={{
+                    fontWeight: "600",
+                    marginLeft: window.innerWidth <= 768 ? "10px" : "0px",
+                  }}
+                >
+                  Quiz
+                </li>
+              </div>
+            </NavLink>
+            <NavLink
+              to="/Calc"
+              style={({ isActive }) => ({
+                color: isActive ? "#466bda" : "#545e6f",
+                textDecoration: "none",
+                fontWeight: "500",
+                // background: isActive ? '#7600dc' : '#f0f0f0',
+              })}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: window.innerWidth <= 768 ? "row" : "column",
+                  alignItems: "center",
+                }}
+              >
+                <FontAwesomeIcon icon={faBox} />
+                <li
+                  className="listItem"
+                  onClick={() => setShowMediaIcons(false)}
+                  style={{
+                    fontWeight: "600",
+                    marginLeft: window.innerWidth <= 768 ? "10px" : "0px",
+                  }}
+                >
+                  Calculators
+                </li>
+              </div>
+            </NavLink>
+            <NavLink
               to="/products"
               style={({ isActive }) => ({
                 color: isActive ? "#466bda" : "#545e6f",
@@ -213,35 +300,7 @@ const Navbar = (props) => {
                 }}>My Orders</li>
               </div>
             </NavLink> */}
-            <NavLink
-              to="/orders"
-              style={({ isActive }) => ({
-                color: isActive ? "#466bda" : "#545e6f",
-                textDecoration: "none",
-                fontWeight: "500",
-                // background: isActive ? '#7600dc' : '#f0f0f0',
-              })}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: window.innerWidth <= 768 ? "row" : "column",
-                  alignItems: "center",
-                }}
-              >
-                <FontAwesomeIcon icon={faClipboardList} />
-                <li
-                  className="listItem"
-                  onClick={() => setShowMediaIcons(false)}
-                  style={{
-                    fontWeight: "600",
-                    marginLeft: window.innerWidth <= 768 ? "10px" : "0px",
-                  }}
-                >
-                  Orders
-                </li>
-              </div>
-            </NavLink>
+            
             <NavLink
               to="/profile"
               style={({ isActive }) => ({

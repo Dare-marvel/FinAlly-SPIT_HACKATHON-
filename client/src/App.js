@@ -12,6 +12,10 @@ import Signup from "./components/Signup";
 import NotFound from "./components/NotFound";
 import Navbar from "./components/Navbar";
 import Navbar2 from "./components/Navbar2";
+import Dashboard from "./Pages/Dashboard";
+import Blogs from "./Pages/Blogs";
+import MCQ from "./Pages/MCQ";
+import Calc from "./Pages/Calc";
 import Navbar3 from "./components/Navbar3";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -57,6 +61,11 @@ function App() {
           <Navbar details={{ role, setRole }} />
           <Routes>
             <Route path="/profile" element={< Profile/>} />
+            <Route path="/Dashboard" element={<Dashboard />} />
+            <Route path="/Blogs" element={<Blogs />} />
+            <Route path="/MCQ" element={<MCQ />} />
+            <Route path="/Calc" element={<Calc />} />
+
             <Route path="*" element={<NotFound />} />
           </Routes>
         </>

@@ -82,6 +82,7 @@ function CProfile() {
         Grole,
         dob,
       } = c.data;
+      setUser({ name, email, phone });
       setCompanyInfo({
         name,
         email,
@@ -138,6 +139,31 @@ function CProfile() {
     document.title = "Sangrah | Profile";
     getUserInfo();
   }, []);
+  // const getUserInfo = async () => {
+  //   try {
+  //     const c = await axios.get("/profile", {
+  //       withCredentials: true,
+  //     });
+  //     const {
+  //       name,
+  //       email,
+  //       phone,
+  //       Grole,
+  //       bank_account,
+  //       walletamt,
+  //       sip,
+  //       points,
+  //       transactions
+  //     } = c.data;
+  //     setUser({ name, email, phone });
+  //   } catch (error) {
+  //     if (error.response) {
+  //       toast.error(error.response.data.error);
+  //     } else {
+  //       toast.error("Some error occured");
+  //     }
+  //   }
+  // };
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
@@ -250,6 +276,7 @@ function CProfile() {
       <Container maxWidth="lg">
         <Grid container spacing={3}>
           {/* Company Profile */}
+          {user.name}
           <Grid item xs={12}>
             <Paper
               elevation={3}

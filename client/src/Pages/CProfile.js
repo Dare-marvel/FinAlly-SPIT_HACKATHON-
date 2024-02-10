@@ -11,6 +11,7 @@ import img2 from "../assets/badges2.png";
 import img3 from "../assets/badges3.png";
 import img4 from "../assets/badges4.png";
 import img5 from "../assets/Badges5.png";
+import {loadStripe} from '@stripe/stripe-js';
 import {
   Container,
   Grid,
@@ -76,6 +77,8 @@ function CProfile() {
     address: "",
     zoom: 10,
   });
+  const [amount, setAmount] = useState('');
+  const [roundUp, setRoundUp] = useState(false);
 
 
   useEffect(() => {
@@ -213,6 +216,7 @@ console.log(user.points);
     num();
     
   }, [user]);
+  
   // const getUserInfo = async () => {
   //   try {
   //     const c = await axios.get("/profile", {
@@ -253,6 +257,7 @@ console.log(user.points);
   };
 
   const [openModal, setOpenModal] = useState(false);
+  const [openModalPay, setOpenModalPay] = useState(false);
   const [openModalLocation, setOpenModalLocation] = useState(false);
   const [openModalChoose, setOpenModalChoose] = useState(false);
 
@@ -262,6 +267,13 @@ console.log(user.points);
 
   const handleCloseModal = () => {
     setOpenModal(false);
+  };
+  const handleOpenModalPay = async () => {
+    setOpenModalPay(true);
+  };
+
+  const handleCloseModalPay = () => {
+    setOpenModalPay(false);
   };
 
   const handleOpenModalLocation = async () => {
@@ -343,6 +355,7 @@ console.log(user.points);
     getUserInfo();
     handleCloseModal();
   };
+
   const transactions = [
     { type: 'wallet', amt: 100, date: '2024-02-10' },
     { type: 'bank', amt: 200, date: '2024-02-09' },
@@ -360,6 +373,36 @@ console.log(user.points);
     { type: 'bank', amt: 250, date: '2024-01-28' },
     { type: 'wallet', amt: 170, date: '2024-01-27' },
 ];
+const handleSubmit2 = (e) => {
+    e.preventDefault();
+    let originalAmount = parseFloat(amount);
+    let finalAmount = originalAmount;
+    if (roundUp) {
+      finalAmount = Math.ceil(finalAmount);
+    }
+    const bal = finalAmount - originalAmount; // Calculate the balance/savings due to rounding up
+
+    console.log('Original Amount:', originalAmount);
+    console.log('Final Amount (rounded) to be sent to the backend:', finalAmount);
+    console.log('Balance/Savings due to rounding up:', bal);
+
+    // Using Axios to send the details to your backend
+    let useremail = user.email
+    axios.post('/paymenter', { 
+      originalAmount,
+      roundUp,
+      finalAmount,
+      bal ,
+      useremail,
+    })
+    .then(response => {
+      console.log('Response:', response.data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  };
+
   return (
     <>
       <br />
@@ -433,6 +476,15 @@ console.log(user.points);
                 startIcon={<EditIcon />}
               >
                 Edit
+              </Button>
+              <br></br>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleOpenModalPay}
+                startIcon={<EditIcon />}
+              >
+                Pay
               </Button>
             </div>
           </Grid>
@@ -510,7 +562,58 @@ console.log(user.points);
       <br></br>
 
       <br></br>
-      
+      <Modal open={openModalPay} onClose={handleCloseModalPay}>
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            width: "900px",
+            transform: "translate(-50%, -50%)",
+            maxWidth: "100%", // Adjust the maximum width as needed
+            bgcolor: "background.paper",
+            boxShadow: 24,
+            p: 4,
+            overflowY: "auto", // Enable vertical scrolling
+            maxHeight: "90vh", // Limit the maximum height to the viewport height
+          }}
+        >
+          <Typography variant="h6" gutterBottom>
+            Pay Now - With Round Off, if activated<br></br>
+            (Can be activated from the Wallets Page)
+          </Typography>
+          <br></br>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+          
+          </div>
+          <form onSubmit={handleSubmit2}>
+      <label>
+        Amount:
+        <input
+          type="number"
+          step="0.01"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+        />
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          checked={roundUp}
+          onChange={(e) => setRoundUp(e.target.checked)}
+        />
+        Do you want to round up savings?
+      </label>
+      <button type="submit">Pay</button>
+    </form>
+        </Box>
+      </Modal>
       <h1 style={{display: "flex",justifyContent:"center",alignItems:"center"}}>
         My Badges
       </h1>

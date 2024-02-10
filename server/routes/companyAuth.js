@@ -9,7 +9,6 @@ const Vendor = require("../models/Bank");
 const Dashboard = require("../models/Dashboard");
 const Order = require("../models/Order");
 const Profile = require("../models/Profile");
-
 router.post("/userregister", async (req, res) => {
   const { name, email, phone, role, password, cpassword } = req.body;
 
@@ -645,4 +644,187 @@ router.get('/monthlysales_c', async (req, res) => {
 });
 
 
+// ============================================================================
+// udits code
+
+//My code for scoreform
+router.post('/scoreForm', async (req, res) => {
+  try {
+    // Create a new user instance using the provided form data
+    const user = new User(req.body);
+
+    // Save the user to the database
+    await user.save();
+
+    res.status(201).json({ message: 'Form data saved successfully' });
+  } catch (error) {
+    console.error('Error saving form data:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
+router.get('/getleaderboard', async (req, res) => {
+  try {
+    // Fetch users from the database, sorted by points in descending order
+    const users = await User.find().sort({ points: -1 });
+    // console.log(users);
+    // Prepare response data with only necessary fields (name and points)
+    const userData = users.map(user => ({
+      name: user.name,
+      points: user.points
+    }));
+
+    res.json(userData); // Send the sorted user data as a JSON response
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
+// ==============================================================================
+// MY CODE
+const Blog = require("../models/Blog");
+
+router.post('/createblogs', async (req, res) => {
+  try {
+    // console.log("Inside Craete BLOGS")
+    const blogsData = req.body;
+
+    // Assuming blogsData is an array of blog objects
+    const createdBlogs = await Blog.insertMany(blogsData);
+
+    res.status(201).json({ msg: "Blogs created successfully", blogs: createdBlogs });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Some unexpected error occurred" });
+  }
+});
+// Route to fetch all blogs
+router.get('/getblogs', async (req, res) => {
+  try {
+    const blogs = await Blog.find();
+    res.status(200).json(blogs);
+  } catch (error) {
+    console.error('Error fetching blogs:', error);
+    res.status(500).json({ error: 'Failed to fetch blogs' });
+  }
+});
+
+router.post('/getbadgegrade', (req, res) => {
+  const { points } = req.body;
+  let grade;
+
+  if (points > 10000) {
+    grade = 5; // Platinum Badge
+  } else if (points > 3000) {
+    grade = 4; // Gold Badge
+  } else if (points > 1500) {
+    grade = 3; // Silver Badge
+  } else if (points > 500) {
+    grade = 2; // Bronze Badge
+  } else if (points > 100) {
+    grade = 1; // Beginner Badge
+  } else {
+    grade = 0; // No Badge
+  }
+
+  res.json({ grade });
+});
+
+// For mcqs
+//ADwait 
+// ------------------------------------------------------------------------------------
+router.get("/fetchMCQs", async (req, res) => {
+  try {
+      const mcqsData = await Mcqs.find();
+      return res.json(mcqsData[0]);
+  } catch (error) {
+      console.error('Error fetching MCQs:', error.message);
+      return res.status(500).json({ success: false, error: 'Internal Server Error' });
+  }
+});
+
+// router.post('/submitMcqs', async (req, res) => {
+//   try {
+//       const mcqData = req.body; // Assuming you're sending MCQ data in the request body
+
+//       // Validate mcqData based on your model's schema before saving
+//       // ...
+//       // console.log("MY MCQDATA on line 667:", );'
+//       console.log("MY MCQDATA on line 31:", mcqData.MYSCORE);
+//       console.log("MY MCQDATA on line 31:", mcqData.CURRUSER);
+      
+
+      
+//   } catch (error) {
+//       // Handle any errors
+//       console.error(error);
+//       res.status(500).json({ error: 'Internal Server Error' });
+//   }
+// });
+
+
+router.post('/submitMcqs', async (req, res) => {
+  try {
+    const mcqData = req.body; // Assuming you're sending MCQ data in the request body
+
+    // Validate mcqData based on your model's schema before saving
+    // ...
+
+    console.log("MY MCQDATA on line 31:", mcqData.MYSCORE);
+    console.log("MY MCQDATA on line 31:", mcqData.CURRUSER);
+
+    // Find the user by the provided CURRUSER value
+    const user = await User.findOne({ email: mcqData.CURRUSER });
+
+    if (!user) {
+      // Handle the case where the user is not found
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Assuming MYSCORE is the earned points from the MCQ
+    const earnedPoints = mcqData.MYSCORE;
+
+    // Update user points
+    user.points += earnedPoints;
+    await user.save();
+
+    console.log('User points updated:', user.points);
+
+    res.status(200).json({ message: 'MCQ data submitted successfully', earnedPoints });
+  } catch (error) {
+    // Handle any errors
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
+
+
+router.post('/populate_data', async (req, res) => {
+  try {
+    const mcqData = req.body; // Assuming you're sending MCQ data in the request body
+
+    // Validate mcqData based on your model's schema before saving
+    // ...
+
+    // Save MCQ data to the database
+    const newMcqs = new Mcqs(mcqData);
+    const savedMcqs = await newMcqs.save();
+
+    res.status(201).json(savedMcqs);
+  } catch (error) {
+    // Handle any errors
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+//------------------------------------------------------------
 module.exports = router;
+
+
+

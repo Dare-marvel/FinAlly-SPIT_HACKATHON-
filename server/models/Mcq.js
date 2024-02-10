@@ -9,7 +9,6 @@ const mcqSchema = new mongoose.Schema({
                 required: true
             },
             test:[
-            [
                 {
                     q_no:{
                         type: Number,
@@ -25,14 +24,14 @@ const mcqSchema = new mongoose.Schema({
                     },
                     user_ans:{
                         type: Number,
-                        required: true
+                        required: true,
+                        default: -1
                     },
                     correct_answer: {
                         type: Number,
                         required: true
                     } 
-                },
-            ],        
+                },      
             ],
             
         }

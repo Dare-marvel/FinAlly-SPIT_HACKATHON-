@@ -41,7 +41,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const Marketplace = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-    document.title = "Sangrah | Marketplace";
+    document.title = "FinAlly | Marketplace";
   }, []);
   const cardColorsList = [
     "rgba(250, 243, 240, 0.5)",

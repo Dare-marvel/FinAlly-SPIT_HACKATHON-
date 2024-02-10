@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 const Login = (props) => {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-    document.title = "Sangrah | Login";
+    document.title = "FinAlly | Login";
   }, []);
   const [userDataSignUp, setUserDataSignUp] = useState({
     name: "",

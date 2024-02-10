@@ -33,11 +33,12 @@ function Predictor() {
   };
 
   return (
-    <div className="App">
-      <center>
-        <h1 className="h1">Predict Investment</h1>
-        <form className="form" onSubmit={handleSubmit}>
+    <div style={{ textAlign: 'center', marginTop: '50px' }}>
+      <h1 style={{ fontSize: '24px', marginBottom: '20px' }}>Predict Investment</h1>
+      <form style={{ width: '300px', margin: 'auto' }} onSubmit={handleSubmit}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <TextField
+            style={{ marginBottom: '10px', width: '100%' }}
             type="text"
             name="Investment_Amount"
             label="Investment Amount"
@@ -45,7 +46,7 @@ function Predictor() {
             value={formData.Investment_Amount}
             onChange={handleChange}
           />
-          <FormControl fullWidth>
+          <FormControl fullWidth style={{ marginBottom: '10px' }}>
             <InputLabel>Risk Tolerance</InputLabel>
             <Select
               name="Risk_Tolerance"
@@ -60,6 +61,7 @@ function Predictor() {
             </Select>
           </FormControl>
           <TextField
+            style={{ marginBottom: '10px', width: '100%' }}
             type="text"
             name="Spending_Amount"
             label="Spending Amount"
@@ -70,13 +72,14 @@ function Predictor() {
           <Button
             type="submit"
             variant="contained"
-            className="button"
+            style={{ marginTop: '20px' }}
           >
             Predict Investment
           </Button>
-        </form>
-        {prediction && <p>Prediction Result: {prediction}</p>}
-      </center>
+        </div>
+      </form>
+      <br></br>
+      {prediction && <p>{prediction}</p>}
     </div>
   );
 }

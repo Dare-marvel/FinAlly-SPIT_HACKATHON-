@@ -13,6 +13,7 @@ import Signup from "./components/Signup";
 import NotFound from "./components/NotFound";
 import Navbar from "./components/Navbar";
 import Navbar2 from "./components/Navbar2";
+import HomeAbout from "./components/AboutUs/HomeAbout";
 // import Dashboard from "./Pages/Dashboard";
 import Blogs from "./Pages/Blogs";
 import MCQ from "./Pages/MCQ";
@@ -53,7 +54,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/home" element={<Home />} />
-            {/* <Route exact path="/homeabout" element={<About />}></Route> */}
+            <Route exact path="/homeabout" element={<HomeAbout />}></Route>
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login details={{ setRole }} />} />
             <Route path="/signup" element={<Signup />} />

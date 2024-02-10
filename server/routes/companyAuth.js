@@ -9,7 +9,6 @@ const Vendor = require("../models/Bank");
 const Dashboard = require("../models/Dashboard");
 const Order = require("../models/Order");
 const Profile = require("../models/Profile");
-
 router.post("/userregister", async (req, res) => {
   const { name, email, phone, role, password, cpassword } = req.body;
 
@@ -645,4 +644,56 @@ router.get('/monthlysales_c', async (req, res) => {
 });
 
 
+// ============================================================================
+// udits code
+
+//My code for scoreform
+router.post('/scoreForm', async (req, res) => {
+  try {
+    // Create a new user instance using the provided form data
+    const user = new User(req.body);
+
+    // Save the user to the database
+    await user.save();
+
+    res.status(201).json({ message: 'Form data saved successfully' });
+  } catch (error) {
+    console.error('Error saving form data:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// ==============================================================================
+// MY CODE
+const Blog = require("../models/Blog");
+
+router.post('/createblogs', async (req, res) => {
+  try {
+    // console.log("Inside Craete BLOGS")
+    const blogsData = req.body;
+
+    // Assuming blogsData is an array of blog objects
+    const createdBlogs = await Blog.insertMany(blogsData);
+
+    res.status(201).json({ msg: "Blogs created successfully", blogs: createdBlogs });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Some unexpected error occurred" });
+  }
+});
+// Route to fetch all blogs
+router.get('/getblogs', async (req, res) => {
+  try {
+    const blogs = await Blog.find();
+    res.status(200).json(blogs);
+  } catch (error) {
+    console.error('Error fetching blogs:', error);
+    res.status(500).json({ error: 'Failed to fetch blogs' });
+  }
+});
+
+
 module.exports = router;
+
+
+

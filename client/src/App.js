@@ -7,7 +7,7 @@ import { Routes, Route} from "react-router-dom";
 import Home from "./components/Home";
 import Contact from "./components/Contact";
 import Login from "./components/Login";
-import About from "./components/";
+// import About from "./components/";
 import Signup from "./components/Signup";
 // import Logout from './components/Logout';
 import NotFound from "./components/NotFound";
@@ -53,7 +53,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/home" element={<Home />} />
-            <Route exact path="/homeabout" element={<About />}></Route>
+            {/* <Route exact path="/homeabout" element={<About />}></Route> */}
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login details={{ setRole }} />} />
             <Route path="/signup" element={<Signup />} />

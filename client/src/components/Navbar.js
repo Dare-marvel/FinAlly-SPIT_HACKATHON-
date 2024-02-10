@@ -219,7 +219,7 @@ const Navbar = (props) => {
                 </li>
               </div>
             </NavLink>
-            <NavLink
+            {/* <NavLink
               to="/products"
               style={({ isActive }) => ({
                 color: isActive ? "#466bda" : "#545e6f",
@@ -247,7 +247,7 @@ const Navbar = (props) => {
                   Products
                 </li>
               </div>
-            </NavLink>
+            </NavLink> */}
 
             {role === "bank" ? (
               <NavLink

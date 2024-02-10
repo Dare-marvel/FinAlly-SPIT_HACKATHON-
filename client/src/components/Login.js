@@ -82,7 +82,7 @@ const Login = (props) => {
           toast.success(res.data.msg);
           const { setRole } = props.details;
           setRole("user");
-          navigate("/codb");
+          navigate("/dbne");
         }
       } catch (error) {
         if (error.response) {

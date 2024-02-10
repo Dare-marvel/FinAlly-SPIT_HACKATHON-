@@ -663,6 +663,26 @@ router.post('/scoreForm', async (req, res) => {
   }
 });
 
+
+router.get('/getleaderboard', async (req, res) => {
+  try {
+    // Fetch users from the database, sorted by points in descending order
+    const users = await User.find().sort({ points: -1 });
+    // console.log(users);
+    // Prepare response data with only necessary fields (name and points)
+    const userData = users.map(user => ({
+      name: user.name,
+      points: user.points
+    }));
+
+    res.json(userData); // Send the sorted user data as a JSON response
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
 // ==============================================================================
 // MY CODE
 const Blog = require("../models/Blog");

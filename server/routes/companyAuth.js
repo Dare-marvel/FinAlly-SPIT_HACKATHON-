@@ -740,11 +740,11 @@ router.post('/getbadgegrade', (req, res) => {
 // ------------------------------------------------------------------------------------
 router.get("/fetchMCQs", async (req, res) => {
   try {
-      const mcqsData = await Mcqs.find();
-      return res.json(mcqsData[0]);
+    const mcqsData = await Mcqs.find();
+    return res.json(mcqsData[0]);
   } catch (error) {
-      console.error('Error fetching MCQs:', error.message);
-      return res.status(500).json({ success: false, error: 'Internal Server Error' });
+    console.error('Error fetching MCQs:', error.message);
+    return res.status(500).json({ success: false, error: 'Internal Server Error' });
   }
 });
 
@@ -757,9 +757,9 @@ router.get("/fetchMCQs", async (req, res) => {
 //       // console.log("MY MCQDATA on line 667:", );'
 //       console.log("MY MCQDATA on line 31:", mcqData.MYSCORE);
 //       console.log("MY MCQDATA on line 31:", mcqData.CURRUSER);
-      
 
-      
+
+
 //   } catch (error) {
 //       // Handle any errors
 //       console.error(error);
@@ -823,6 +823,79 @@ router.post('/populate_data', async (req, res) => {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
+});
+//scoreForm 
+
+
+
+
+
+
+router.post('/scoreForm', (req, res) => {
+  // Extract data from the request body
+  const { salary, age, expenditure, savings } = req.body;
+
+  // Perform scoring calculation
+  const savingsPercentage = (savings / salary) * 100;
+  const expenditurePercentage = (expenditure / salary) * 100;
+  const ageScore = calculateAgeScore(age);
+  const savingsScore = calculateSavingsScore(savingsPercentage);
+  const expenditureScore = calculateExpenditureScore(expenditurePercentage);
+
+  // Calculate overall score based on weighted factors
+  const overallScore = (ageScore * 0.3) + (savingsScore * 0.4) + (expenditureScore * 0.3);
+
+  // Determine score category based on overall score
+  let scoreCategory;
+  if (overallScore >= 80) {
+    scoreCategory = 'Excellent';
+  } else if (overallScore >= 60) {
+    scoreCategory = 'Good';
+  } else if (overallScore >= 40) {
+    scoreCategory = 'Fair';
+  } else {
+    scoreCategory = 'Poor';
+  }
+
+  // Send the score back to the frontend
+  res.status(200).json({ overallScore, scoreCategory });
+});
+
+router.post('/paymenter', async (req, res) => {
+  try {
+    // Destructure the values sent in the request body
+    const { originalAmount, roundUp, finalAmount, bal, useremail } = req.body;
+
+    // Assuming you identify the user somehow (e.g., via session or token)
+    // For this example, let's say you have the user's email or ID in the session
+
+    // Fetch the user's current details
+    console.log("USER EMAIL IN PAYMENTER:", useremail)
+    const user = await User.findOne({ email: useremail });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Update calculations here
+    let newWalletAmt = user.walletamt;
+    let newBankBalanceAmt = user.bank_account.balance_amt - finalAmount;
+
+    // Assuming you want to add the rounded up difference (bal) to the wallet
+    if (roundUp) {
+      newWalletAmt += bal; // Add the rounded up difference to the wallet
+    }
+
+    // Update user's wallet and bank account balances in the database
+    user.walletamt = newWalletAmt;
+    user.bank_account.balance_amt = newBankBalanceAmt;
+    const updatedUser = await user.save();
+
+    res.status(200).json({ message: "Payment processed successfully", updatedUser });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "An error occurred" });
+  }
+
 });
 
 //------------------------------------------------------------

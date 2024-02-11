@@ -735,6 +735,64 @@ router.post('/getbadgegrade', (req, res) => {
   res.json({ grade });
 });
 
+router.post('/add-sip', async (req, res) => {
+  const { email, sipAmount } = req.body;
+
+  try {
+    // Find the user by email
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Update SIP amount and streak
+    user.sip.amt += parseInt(sipAmount);
+    user.sip.streak += 1;
+
+    // Subtract SIP amount from bank balance
+    user.bank_account.balance_amt -= parseInt(sipAmount);
+
+    // Add SIP amount into wallet
+    user.walletamt += parseInt(sipAmount);
+
+    // Save the updated user data
+    await user.save();
+    console.log("SIP ADDED SUCCESSFULLY")
+
+    return res.status(200).json({ message: 'SIP added successfully', user });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
+// Define a route to handle the transfer money request
+router.post('/transfer-money', async (req, res) => {
+  const { email, transferamt } = req.body;
+  try {
+    // Retrieve amount from the request body
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    };
+    // Update the user's bank account balance
+    user.bank_account.balance_amt += parseInt(transferamt);
+    user.walletamt -= parseInt(transferamt);
+
+    // Update the wallet balance or perform any other necessary actions
+    // Save the updated user data
+    await user.save();
+
+    // Optionally, you can send a response back to the frontend
+    res.status(200).json({ message: 'Money transferred successfully' });
+  } catch (error) {
+    console.error('Error occurred while transferring money:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 // For mcqs
 //ADwait 
 // ------------------------------------------------------------------------------------
@@ -745,6 +803,33 @@ router.get("/fetchMCQs", async (req, res) => {
   } catch (error) {
     console.error('Error fetching MCQs:', error.message);
     return res.status(500).json({ success: false, error: 'Internal Server Error' });
+  }
+});
+
+router.post('/break-sip', async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    // Find the user by email
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Reset SIP amount and streak to 0
+    user.sip.amt = 0;
+    user.sip.streak = 0;
+
+    // Save the updated user data
+    await user.save();
+
+    console.log("SIP BROKEN SUCCESSFULLY");
+
+    return res.status(200).json({ message: 'SIP broken successfully', user });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 

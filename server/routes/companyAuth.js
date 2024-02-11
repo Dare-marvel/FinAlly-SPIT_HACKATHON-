@@ -755,6 +755,7 @@ router.post('/add-sip', async (req, res) => {
 
     // Add SIP amount into wallet
     user.walletamt += parseInt(sipAmount);
+    user.walletamt = user.walletamt + (0.0003*user.walletamt)
 
     // Save the updated user data
     await user.save();

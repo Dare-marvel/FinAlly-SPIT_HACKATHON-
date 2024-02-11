@@ -34,8 +34,8 @@ function Predictor() {
 
   return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
-      <h1 style={{ fontSize: '24px', marginBottom: '20px' }}>Predict Investment</h1>
-      <form style={{ width: '300px', margin: 'auto' }} onSubmit={handleSubmit}>
+      <h3 style={{ fontSize: '24px', marginBottom: '20px' }}>Predict Your Investment Choice</h3>
+      <form style={{ width: '600px', margin: 'auto' }} onSubmit={handleSubmit}>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <TextField
             style={{ marginBottom: '10px', width: '100%' }}
@@ -47,13 +47,14 @@ function Predictor() {
             onChange={handleChange}
           />
           <FormControl fullWidth style={{ marginBottom: '10px' }}>
-            <InputLabel>Risk Tolerance</InputLabel>
+            <InputLabel >Risk Tolerance</InputLabel>
             <Select
               name="Risk_Tolerance"
               value={formData.Risk_Tolerance}
               onChange={handleChange}
               required
               inputProps={{ name: 'Risk_Tolerance' }}
+              style={{ marginTop: '10px' }}
             >
               <MenuItem value="High">High</MenuItem>
               <MenuItem value="Medium">Medium</MenuItem>

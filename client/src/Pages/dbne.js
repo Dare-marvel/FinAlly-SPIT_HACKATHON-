@@ -64,18 +64,36 @@ const Dbne = () => {
 
     return (
         <div>
-        <div style={{ maxWidth: '600px', margin: '0 auto', borderRadius: '10px', backgroundColor: 'rgba(200, 200, 200, 0.5)', padding: '10px' }}>
-            <canvas ref={chartContainer}></canvas>
+        <div style={{
+            // border: "2px solid red",
+            display: "flex",
+            padding: "2rem",
+            justifyContent: "space-around"
+        }}>
+        <div style={{ width: '100%',height: "fit-content", margin: '0 auto', borderRadius: '10px', padding: '10px', display: "flex", flexDirection: "column", justifyContent: "center"}}>
+            <div style={{ width: '90%',height: "100%", margin: '0 auto', borderRadius: '10px', backgroundColor: 'rgb(217, 227, 237, 0.6)', padding: '1rem' }}>
+                <canvas ref={chartContainer}></canvas>
+            </div>
+            <div >
+                <Score/>
+            </div>  
         </div>
-        <div>
+
+
+        <div style={{
+            width : "50%",
+            // border: "1px solid red"
+        }}>
+        <div >
             <Lead/>
         </div>
         <div>
-            <Score/>
-        </div>    
-        <div>
             <Predictor/>
-        </div>    
+        </div> 
+        </div>
+        </div>
+         
+           
         </div>
     );
 };

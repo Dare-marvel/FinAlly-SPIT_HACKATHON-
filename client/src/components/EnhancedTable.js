@@ -111,7 +111,7 @@ export default function EnhancedTable({ transactions }) {
 
   return (
     <div>
-    <Box sx={{ width: '100%', border:"2px solid black" }}>
+    <Box sx={{ width: '100%', border:"2px solid grey" }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
         <TableContainer>
           <Table sx={{ minWidth: 500 }} aria-labelledby="tableTitle">

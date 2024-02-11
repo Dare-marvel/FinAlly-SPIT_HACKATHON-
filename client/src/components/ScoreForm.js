@@ -149,8 +149,13 @@ function ScoreForm() {
 
     return (
         <>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-                <div style={{ borderRadius: 8, backgroundColor: '#f0f0f0', padding: 20, maxWidth: 400 }}>
+            <div style={{
+                textAlign: "center",
+                padding: "3rem 2rem "
+            }}>
+            <h3>Predict Your Score</h3>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' , padding: "1rem"}}>
+                <div style={{ borderRadius: 8, backgroundColor: 'rgb(217, 227, 237, 0.6)', padding: 20, maxWidth: 400 }}>
                     <form onSubmit={handleSubmit}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
@@ -194,7 +199,7 @@ function ScoreForm() {
                                 />
                             </Grid>
                         </Grid>
-                        <Button type="submit" variant="contained" color="primary" style={{ marginTop: 20 }}>
+                        <Button type="submit" variant="contained" color="primary" style={{ marginTop: 20 , marginLeft: 0  }}>
                             Submit
                         </Button>
                     </form>
@@ -203,9 +208,10 @@ function ScoreForm() {
 
             {/* Display the score category */}
             <div>
-                <h2>Score Category: {scoreCategory}</h2>
-                <h2>Overall Score: {overallScore}</h2>
+                <h4>Score Category: {scoreCategory}</h4>
+                <h4>Overall Score: {overallScore}</h4>
 
+            </div>
             </div>
         </>
     );

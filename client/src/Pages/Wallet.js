@@ -106,11 +106,99 @@ const Wallet = () => {
         }
     };
     return (
-        <>
-          
-            <div>
-                Start Your SIP Today with us.
+        <>  
+        
+        <div style={{
+            // border:"2px solid red",
+            textAlign: "right",
+            margin: "20px 30px 0 0",
+            fontWeight: "500"
+        }}>
+            Your Current Streak: {user.sip ? user.sip.streak : 0}
+        </div>
+
+            <div style={{
+                width: "100%",
+                textAlign: "center",
+                padding: "2.5rem"
+            }}>
+                <h3>Account Details</h3>
             </div>
+           
+            <div style={{
+                display: "flex",
+                // border: "2px solid red",
+                width: "70%",
+                margin: "0px auto",
+                justifyContent: "space-around"
+            }}>
+            <div style={{
+                borderRadius: "20px",
+                backgroundColor: "rgb(232, 238, 244)",
+                height: "100px",
+                width: "300px",
+                padding:"1.5rem",
+                textAlign: "center",
+                
+            }}>
+                <div style={{
+                    fontWeight: "500",
+                    fontSize: "1.3rem"
+                }}>YOUR BANK BALANCE</div>
+                <div  style={{
+                    fontWeight: "500",
+                    fontSize: "1rem"
+                }}>₹ {user.bank_account.balance_amt}</div>
+            </div>
+            <div style={{
+                borderRadius: "20px",
+                backgroundColor: "rgb(232, 238, 244)",
+                height: "100px",
+                width: "300px",
+                padding:"1.5rem",
+                textAlign: "center",
+                
+            }}>
+                <div style={{
+                    fontWeight: "500",
+                    fontSize: "1.3rem"
+                }}>YOUR WALLET BALANCE</div>
+                <div  style={{
+                    fontWeight: "500",
+                    fontSize: "1rem"
+                }}>₹ {user.walletamt}</div>
+            </div>
+            <div style={{
+                borderRadius: "20px",
+                backgroundColor: "rgb(232, 238, 244)",
+                height: "100px",
+                width: "300px",
+                padding:"1.5rem",
+                textAlign: "center",
+                
+            }}>
+                <div style={{
+                    fontWeight: "500",
+                    fontSize: "1.3rem",
+                }}>YOUR SIP AMOUNT</div>
+                <div  style={{
+                    fontWeight: "500",
+                    fontSize: "1rem"
+                }}>₹ {user.sip ? user.sip.amt : 0}</div>
+            </div>
+            </div>
+
+            {/* =================================================== */}
+            
+            
+            <div style={{
+                display: "flex",
+                // border: "2px solid red",
+                justifyContent: "space-around",
+                width: "55%",
+                margin:"0 auto",
+                padding:"2rem 0"
+            }}>
             <Box
                 component="form"
                 onSubmit={handleFormSubmit}
@@ -119,7 +207,14 @@ const Wallet = () => {
                 }}
                 noValidate
                 autoComplete="off"
+                style = {{
+                    border : "2px solid red",
+                    padding: "2rem",
+                    borderRadius: "30px",
+                    border: "0.5px solid grey"
+                }}
             >
+                <h6>Manage your SIP</h6>
                 <div>
                     <TextField
                         id="standard-input"
@@ -130,24 +225,28 @@ const Wallet = () => {
                         onChange={(e) => setSipAmount(e.target.value)}
                     />
                 </div>
-                <Button type="submit" variant="contained" color="primary">
+                <div style={{
+                    display: "flex",
+                    flexDirection:"column"
+                }}>
+                <Button type="submit" variant="contained" color="primary" style={{
+                    borderRadius: "30px",
+                    margin: "10px 0",
+                    width: "fit-content"
+                }}>
                     Add SIP to your Wallet
                 </Button>
+                <Button variant="contained" color="secondary" onClick={handleBreakSip} style={{
+                    borderRadius: "30px",
+                    margin: "10px 0",
+                    width: "fit-content"
+                }}>
+                   
+            Break SIP
+        </Button>
+                </div>
             </Box>
-            <div>
-                YOUR BANK BALANCE : {user.bank_account.balance_amt}
-            </div>
-            <div>
-                YOUR WALLET BALANCE : {user.walletamt}
-            </div>
-            <div>
-                YOUR SIP AMOUNT : {user.sip ? user.sip.amt : 0}
-            </div>
-
-            {/* =================================================== */}
-
-            <div>
-            Tranfer Money to your Bank Account
+            
             <Box
                 component="form"
                 onSubmit={handleFormSubmit2}
@@ -156,7 +255,15 @@ const Wallet = () => {
                 }}
                 noValidate
                 autoComplete="off"
+                style = {{
+                    border : "2px solid red",
+                    padding: "2rem",
+                    borderRadius: "30px",
+                    border: "0.5px solid grey"
+
+                }}
             >
+                <h6>Tranfer Money to your Bank Account</h6>
                 <div>
                     <TextField
                         id="standard-input"
@@ -167,19 +274,15 @@ const Wallet = () => {
                         onChange={(e) => setTransferAmount(e.target.value)}
                     />
                 </div>
-                <Button type="submit" variant="contained" color="primary">
+                <Button type="submit" variant="contained" color="primary" style={{
+                    borderRadius: "30px"
+                }}>
                     Transfer
                 </Button>
             </Box>
         </div>
 
-        <div>
-            Your Current Streak: {user.sip ? user.sip.streak : 0}
-        </div>
-
-        <Button variant="contained" color="secondary" onClick={handleBreakSip}>
-            Break SIP
-        </Button>
+       
 
         </>
     );

@@ -656,7 +656,7 @@ router.post('/scoreForm', async (req, res) => {
     const user = new User(req.body);
 
     // Save the user to the database
-    await user.save();
+    await user.save();  
 
     res.status(201).json({ message: 'Form data saved successfully' });
   } catch (error) {

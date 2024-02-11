@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Button from '@mui/material/Button';
+import Alert from '@mui/material/Alert';
 
 const dummymcqs = {
     "topicwise_tests": [
@@ -252,6 +254,8 @@ const MCQ = () => {
             const response = await axios.post('/submitMcqs', { MYSCORE: myscore, CURRUSER: curruser });
             // Handle the response as needed
             console.log('Response from backend:', response.data);
+            alert(`Thank You for Attempting the Test. YOUR SCORE:  ${response.data.earnedPoints}`)
+            window.location.reload()
         } catch (error) {
             console.error('Error sending data:', error.message);
         }
@@ -283,12 +287,40 @@ const MCQ = () => {
     }, [myTest])
 
     return (
-        <div>
-            <h1>Questionnaire</h1>
+        <div style={{
+            display: 'block',
+            width: "100vw",
+            height: "100%"
+        }}>
+        <div style={{
+                padding: "1rem 0 0 0 ",
+                margin: "1rem auto",
+                width: "600px",
+                // border: "2px solid red",
+                borderRadius: "25px",
+                padding: "1rem",
+                backgroundColor: "rgb(232, 238, 244)"
 
+            }}>
+            <h3  style={{
+                width: "600px",
+                textAlign: "center",
+                margin: "0 auto",
+                marginTop : "20px"
+            }}>Test Your Knowledge</h3>
+            <div style={{
+                padding: "1rem 0"
+            }}>
+            <div style={{
+                width: "600px",
+                // border: "2px solid red",
+                display: "flex",
+                justifyContent: "space-around",
+                padding: "1rem 0"
+            
+            }}>
             {gotData && <label>
                 Select Test Topic:
-
                 <select value={selectedTopic} onChange={handleTopicChange}>
                     <option value="">All Topics</option>
                     {testsData.topicwise_tests.map((test, index) => (
@@ -298,39 +330,20 @@ const MCQ = () => {
                     ))}
                 </select>
             </label>}
+            </div>
 
-            {/* {myTest } */}
-            {/* {myTest.map((testData, testIndex) => (
-                <div key={testIndex}>
-                    {testData.test.map((question, questionIndex) => (
-                        <div key={questionIndex}>
-                            <p>{question.question}</p>
-                            <ul style={{
-                                listStyle: 'none',
-                                padding: 0,
-                                margin: 0
-                            }}>
-                                {question.options.map((option, optionIndex) => (
-                                    <li key={optionIndex}>
-                                        <input
-                                            type="radio"
-                                            name={question_${questionIndex}}
-                                            value={question.user_ans}
-                                        // Add your logic for checked attribute if needed
-                                        />
-                                        {option}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    ))}
-                    </div>
-      ))} */}
+            </div>
+
 
             {myTest.map((testData, testIndex) => (
                 <div key={testIndex}>
                     {testData.test.map((question, questionIndex) => (
-                        <div key={questionIndex}>
+                        <div key={questionIndex} style={{
+                            // border: "2px solid red",
+                            padding: "1rem 0",
+                            
+
+                        }}>
                             <p>{question.question}</p>
                             <ul style={{
                                 listStyle: 'none',
@@ -358,7 +371,13 @@ const MCQ = () => {
 
 
 
-            <button onClick={handleSubmit}>Submit</button>
+            <div style={{
+                // border: "2px solid red",
+                display: "flex",
+                justifyContent: "center",
+                padding: "1rem 0"
+            }}><Button onClick={handleSubmit}>Submit</Button></div>
+        </div>
         </div>
     );
 };

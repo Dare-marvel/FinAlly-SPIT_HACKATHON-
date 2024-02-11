@@ -64,29 +64,47 @@ const Blogs = () => {
 
     return (
         <>
-            <Grid container spacing={2}>
+            <div style={{
+                padding: "2rem",
+                backgroundColor: ""
+            }}>
+            <Grid container spacing={4}>
                 {blogs.map(blog => (
                     <Grid item xs={12} sm={6} md={4} key={blog._id}>
-                        <Card>
+                        <Card style={{
+                            borderRadius: "20px",
+                            backgroundColor: "rgb(232, 238, 244)"
+                        }}>
                             <CardContent>
-                                <Typography variant="h6" component="h2">{blog.title}</Typography>
-                                <Typography variant="body2" color="textSecondary" component="p">
+                                <Typography variant="h6" component="h2" style={{
+                                    margin: "1em"
+                                }}>{blog.title}</Typography>
+                                <Typography variant="body2" color="textSecondary" component="p" style={{
+                                    margin: "1em"
+                                }}>
                                     {blog.content.substring(0, 100)}...
                                 </Typography>
-                                <Button variant="contained" color="primary" href={`/blog/${blog._id}`} onClick={handleOpen}>Read More</Button>
+                                <Button variant="contained" color="primary" href={`/blog/${blog._id}`} onClick={handleOpen} style={{
+                                    margin: "1em"
+                                }}>Read More</Button>
                             </CardContent>
                         </Card>
                     </Grid>
                 ))}
             </Grid>
+            </div>
             <Modal
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <BlogModal>
-                    <h2 id="modal-modal-title">{blog.title}</h2>
+                <BlogModal style={{
+                    padding: "3rem",
+                }}>
+                    <h2 id="modal-modal-title" style={{
+                        margin: "0 0 2rem 0"
+                    }}>{blog.title}</h2>
                     {blog.youtubeLink && (
                         <iframe
                             width="560"
@@ -98,7 +116,10 @@ const Blogs = () => {
                             allowFullScreen
                         ></iframe>
                     )}
-                    <p>{blog.content}</p>
+                    <div style={{
+                        padding: "2em 0",
+                        textAlign: "justify"
+                    }}>{blog.content}</div>
                 </BlogModal>
             </Modal>
         </>

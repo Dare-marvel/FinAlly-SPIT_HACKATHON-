@@ -21,6 +21,7 @@ import axios from "axios";
 import "./NavbarStyle.css";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import {faBookOpenReader,faCalculator,faWallet} from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = (props) => {
   const navigate = useNavigate();
@@ -106,7 +107,7 @@ const Navbar = (props) => {
             <NavLink
               to="/dbne"
               style={({ isActive }) => ({
-                color: isActive ? "#466bda" : "#545e6f",
+                color: isActive ? "#00b0ff" : "#545e6f",
                 textDecoration: "none",
                 fontWeight: "500",
                 // background: isActive ? '#7600dc' : '#f0f0f0',
@@ -135,7 +136,7 @@ const Navbar = (props) => {
             <NavLink
               to="/Blogs"
               style={({ isActive }) => ({
-                color: isActive ? "#466bda" : "#545e6f",
+                color: isActive ? "#00b0ff" : "#545e6f",
                 textDecoration: "none",
                 fontWeight: "500",
                 // background: isActive ? '#7600dc' : '#f0f0f0',
@@ -148,7 +149,7 @@ const Navbar = (props) => {
                   alignItems: "center",
                 }}
               >
-                <FontAwesomeIcon icon={faBox} />
+               <FontAwesomeIcon icon={faBookOpenReader} />
                 <li
                   className="listItem"
                   onClick={() => setShowMediaIcons(false)}
@@ -164,7 +165,7 @@ const Navbar = (props) => {
             <NavLink
               to="/MCQ"
               style={({ isActive }) => ({
-                color: isActive ? "#466bda" : "#545e6f",
+                color: isActive ? "#00b0ff" : "#545e6f",
                 textDecoration: "none",
                 fontWeight: "500",
                 // background: isActive ? '#7600dc' : '#f0f0f0',
@@ -193,7 +194,7 @@ const Navbar = (props) => {
             <NavLink
               to="/Calc"
               style={({ isActive }) => ({
-                color: isActive ? "#466bda" : "#545e6f",
+                color: isActive ? "#00b0ff" : "#545e6f",
                 textDecoration: "none",
                 fontWeight: "500",
                 // background: isActive ? '#7600dc' : '#f0f0f0',
@@ -206,7 +207,7 @@ const Navbar = (props) => {
                   alignItems: "center",
                 }}
               >
-                <FontAwesomeIcon icon={faBox} />
+                <FontAwesomeIcon icon={faCalculator} />
                 <li
                   className="listItem"
                   onClick={() => setShowMediaIcons(false)}
@@ -253,7 +254,7 @@ const Navbar = (props) => {
               <NavLink
                 to="/marketplace"
                 style={({ isActive }) => ({
-                  color: isActive ? "#466bda" : "#545e6f",
+                  color: isActive ? "#00b0ff" : "#545e6f",
                   textDecoration: "none",
                   fontWeight: "500",
                   // background: isActive ? '#7600dc' : '#f0f0f0',
@@ -304,7 +305,7 @@ const Navbar = (props) => {
             <NavLink
               to="/profile"
               style={({ isActive }) => ({
-                color: isActive ? "#466bda" : "#545e6f",
+                color: isActive ? "#00b0ff" : "#545e6f",
                 textDecoration: "none",
                 fontWeight: "500",
                 // background: isActive ? '#7600dc' : '#f0f0f0',
@@ -333,7 +334,7 @@ const Navbar = (props) => {
             <NavLink
               to="/wallet"
               style={({ isActive }) => ({
-                color: isActive ? "#466bda" : "#545e6f",
+                color: isActive ? "#00b0ff" : "#545e6f",
                 textDecoration: "none",
                 fontWeight: "500",
                 // background: isActive ? '#7600dc' : '#f0f0f0',
@@ -346,7 +347,7 @@ const Navbar = (props) => {
                   alignItems: "center",
                 }}
               >
-                <FontAwesomeIcon icon={faUser} />
+               <FontAwesomeIcon icon={faWallet} />
                 <li
                   className="listItem"
                   onClick={() => setShowMediaIcons(false)}
@@ -362,7 +363,7 @@ const Navbar = (props) => {
             <NavLink
               onClick={logout}
               style={({ isActive }) => ({
-                color: isActive ? "#466bda" : "#545e6f",
+                color: isActive ? "#00b0ff" : "#545e6f",
                 textDecoration: "none",
                 fontWeight: "500",
                 // background: isActive ? '#7600dc' : '#f0f0f0',

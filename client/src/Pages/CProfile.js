@@ -6,11 +6,11 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 import EnhancedTable from "../components/EnhancedTable";
 import img123 from "../assets/profile123.png"
 import Footer from "../components/Footer";
-import img1 from "../assets/badges1.png";
-import img2 from "../assets/badges2.png";
-import img3 from "../assets/badges3.png";
-import img4 from "../assets/badges4.png";
-import img5 from "../assets/Badges5.png";
+import img1 from "../assets/badges1new.png";
+import img2 from "../assets/badges2new.png";
+import img3 from "../assets/badges3new.png";
+import img4 from "../assets/badges4new.png";
+import img5 from "../assets/badges5new.png";
 import {loadStripe} from '@stripe/stripe-js';
 import {
   Container,

@@ -33,13 +33,8 @@ import "./CalculatorStyle.css"
 
 const Calculators = () => {
   document.title = "Calculators";
-  return (
+  return ( 
     <>
-      <div className="headerback">
-        <div className="heading">
-          <h2>CALCULATORS</h2>
-        </div>
-      </div>
       {/* <img src={wave} alt="" className="waveimg" /> */}
       <div className="calcheading" id='sipheading'>SIP CALCULATORS</div>
       <div className="calcdiv1">

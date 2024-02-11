@@ -2,7 +2,7 @@ import React from 'react'
 import "./FooterStyle.css";
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
-import footerimg from "../assets/footerdiv.png"
+import footerimg from "../assets/1.jpg"
 import { NavLink } from 'react-router-dom';
 const Footer = () => {
     return (

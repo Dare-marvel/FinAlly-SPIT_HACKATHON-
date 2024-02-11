@@ -4,7 +4,7 @@ import rightsecimg from "../assets/Finance.svg"
 import verficiation from "../assets/Returns.svg"
 import results from "../assets/Investments.svg"
 import createexam from "../assets/Metric.svg"
-import homeimg1 from "../assets/homeimg1.png"
+import homeimg1 from "../assets/2.jpg"
 import testi1 from "../assets/testi1.jpg"
 import testi2 from "../assets/testi2.jpg"
 import testi3 from "../assets/testi3.jpg"
@@ -17,7 +17,7 @@ const Home = () => {
     document.title = 'FinAlly | Home';
   }, [])
   return (
-    <>
+    <> 
       <div className="sec1123">
         <div className="leftsec123">
           <h2>Your Finances FinAlly Made Easy!</h2>

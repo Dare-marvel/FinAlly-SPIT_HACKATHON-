@@ -16,8 +16,8 @@ import { faBox } from '@fortawesome/free-solid-svg-icons'; // Products
 import { faHistory } from '@fortawesome/free-solid-svg-icons'; // History
 import { faClipboardList } from '@fortawesome/free-solid-svg-icons'; // Orders
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'; // Logout
-import {faInfoCircle} from '@fortawesome/free-solid-svg-icons'
-import {faHome} from '@fortawesome/free-solid-svg-icons'
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+import { faHome } from '@fortawesome/free-solid-svg-icons'
 import "./NavbarStyle.css";
 const Navbar = () => {
   const [showMediaIcons, setShowMediaIcons] = useState(false);
@@ -51,7 +51,7 @@ const Navbar = () => {
 
             <NavLink to="/"
               style={({ isActive }) => ({
-                color: isActive ? '#466bda' : '#545e6f',
+                color: isActive ? '#00b0ff' : '#545e6f',
                 textDecoration: 'none',
                 fontWeight: '500',
                 // background: isActive ? '#7600dc' : '#f0f0f0',
@@ -71,7 +71,7 @@ const Navbar = () => {
             </NavLink>
             <NavLink to="/homeabout"
               style={({ isActive }) => ({
-                color: isActive ? '#466bda' : '#545e6f',
+                color: isActive ? '#00b0ff' : '#545e6f',
                 textDecoration: 'none',
                 fontWeight: '500',
                 // background: isActive ? '#7600dc' : '#f0f0f0',
@@ -82,7 +82,7 @@ const Navbar = () => {
                 flexDirection: window.innerWidth <= 768 ? "row" : "column",
                 alignItems: "center",
               }}>
-                <FontAwesomeIcon icon={faInfoCircle } />
+                <FontAwesomeIcon icon={faInfoCircle} />
                 <li className='listItem' onClick={() => setShowMediaIcons(false)} style={{
                   fontWeight: '600',
                   marginLeft: window.innerWidth <= 768 ? "10px" : "0px",
@@ -91,7 +91,7 @@ const Navbar = () => {
             </NavLink>
             <NavLink to="/login"
               style={({ isActive }) => ({
-                color: isActive ? '#466bda' : '#545e6f',
+                color: isActive ? '#00b0ff' : '#545e6f',
                 textDecoration: 'none',
                 fontWeight: '500',
                 // background: isActive ? '#7600dc' : '#f0f0f0',

@@ -37,7 +37,7 @@ const Footer = () => {
                                         <MailOutlineIcon></MailOutlineIcon>
                                     </div>
                                     <div>
-                                        <a className="iamemail123" href="mailto: contact@sangrah.com" target="_blank" rel="noreferrer">contact@FinAlly.com</a>
+                                        <a className="iamemail123" href="mailto: contact@finally.com" target="_blank" rel="noreferrer">contact@FinAlly.com</a>
                                     </div>
                                 </div>
                                 <div className="contactemail123">

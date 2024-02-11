@@ -331,6 +331,35 @@ const Navbar = (props) => {
               </div>
             </NavLink>
             <NavLink
+              to="/wallet"
+              style={({ isActive }) => ({
+                color: isActive ? "#466bda" : "#545e6f",
+                textDecoration: "none",
+                fontWeight: "500",
+                // background: isActive ? '#7600dc' : '#f0f0f0',
+              })}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: window.innerWidth <= 768 ? "row" : "column",
+                  alignItems: "center",
+                }}
+              >
+                <FontAwesomeIcon icon={faUser} />
+                <li
+                  className="listItem"
+                  onClick={() => setShowMediaIcons(false)}
+                  style={{
+                    fontWeight: "600",
+                    marginLeft: window.innerWidth <= 768 ? "10px" : "0px",
+                  }}
+                >
+                  Wallet
+                </li>
+              </div>
+            </NavLink>
+            <NavLink
               onClick={logout}
               style={({ isActive }) => ({
                 color: isActive ? "#466bda" : "#545e6f",

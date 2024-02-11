@@ -3,6 +3,7 @@ import Chart from 'chart.js/auto';
 import Lead from '../components/Lead.js';
 import Score from '../components/ScoreForm.js';
 import Predictor from "../components/Predictor.js"
+import Footer from "../components/Footer.js"
 const Dbne = () => {
     const chartContainer = useRef(null);
     const chartInstance = useRef(null);
@@ -93,7 +94,7 @@ const Dbne = () => {
         </div>
         </div>
          
-           
+           <Footer/>
         </div>
     );
 };

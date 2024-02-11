@@ -5,7 +5,7 @@ import { Grid, Card, CardContent, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { styled } from '@mui/material/styles';
-
+import Footer from '../components/Footer';
 async function createDummyBlog(blogs) {
     alert("Inside Create Dummy Blog")
     try {
@@ -122,6 +122,8 @@ const Blogs = () => {
                     }}>{blog.content}</div>
                 </BlogModal>
             </Modal>
+            <br></br>
+            <Footer/>
         </>
     );
 };

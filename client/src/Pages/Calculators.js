@@ -27,6 +27,7 @@ import Lumpsum3 from '../components/Lumpsum3';
 import Sip1 from "../components/Sip1"
 import Sip2 from "../components/Sip2"
 import Sip3 from "../components/Sip3"
+import Footer from '../components/Footer';
 import "./CalculatorStyle.css"
 // import { Fade } from 'react-awesome-reveal';
 // import wave from "../images/wave.webp"
@@ -48,6 +49,8 @@ const Calculators = () => {
         <Lumpsum3></Lumpsum3>
         <Lumpsum2></Lumpsum2>
       </div>
+      <br></br>
+      <Footer/>
 
 
     </>

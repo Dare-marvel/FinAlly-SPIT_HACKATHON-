@@ -6,7 +6,7 @@ import Modal from '@mui/material/Modal';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-
+import Footer from '../components/Footer';
 const Wallet = () => {
     const [user, setUser] = useState({
         name: "",
@@ -281,9 +281,8 @@ const Wallet = () => {
                 </Button>
             </Box>
         </div>
-
-       
-
+        <br></br>
+        <Footer/>
         </>
     );
 };

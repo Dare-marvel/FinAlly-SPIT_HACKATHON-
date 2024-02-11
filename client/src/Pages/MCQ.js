@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
-
+import Footer from '../components/Footer';
 const dummymcqs = {
     "topicwise_tests": [
         {
@@ -378,6 +378,7 @@ const MCQ = () => {
                 padding: "1rem 0"
             }}><Button onClick={handleSubmit}>Submit</Button></div>
         </div>
+        <Footer/>
         </div>
     );
 };

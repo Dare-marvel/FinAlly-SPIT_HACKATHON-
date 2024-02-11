@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 import Lead from '../components/Lead.js';
 import Score from '../components/ScoreForm.js';
-
+import Predictor from "../components/Predictor.js"
 const Dbne = () => {
     const chartContainer = useRef(null);
     const chartInstance = useRef(null);
@@ -72,6 +72,9 @@ const Dbne = () => {
         </div>
         <div>
             <Score/>
+        </div>    
+        <div>
+            <Predictor/>
         </div>    
         </div>
     );

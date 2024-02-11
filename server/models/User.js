@@ -120,6 +120,32 @@ userSchema.methods.generateAuthToken = async function () {
     }
 }
 
+userSchema.methods.deductAmountFromBalance = async function (amountToDeduct) {
+    try {
+        // Check if the balance is sufficient
+        if (this.bank_account.balance_amt >= amountToDeduct) {
+            this.bank_account.balance_amt -= amountToDeduct;
+            await this.save();
+            return true; // Indicate successful deduction
+        } else {
+            return false; // Insufficient balance
+        }
+    } catch (error) {
+        console.log(error);
+        return false; // Error occurred during deduction
+    }
+}
+
+userSchema.methods.addAmountToSip = async function (amountToAdd) {
+    try {
+        this.walletamt += amountToAdd;
+        await this.save();
+        return true; // Indicate successful addition
+    } catch (error) {
+        console.log(error);
+        return false; // Error occurred during addition
+    }
+}
 
 const User = mongoose.model('user', userSchema);
 module.exports = User;

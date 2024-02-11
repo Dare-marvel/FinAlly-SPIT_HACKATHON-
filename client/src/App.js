@@ -2,7 +2,7 @@ import "./App.css";
 import "./css_files/rohit.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState, useEffect } from "react";
-import { Routes, Route} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 // import Navbar from './components/Navbar';
 import Home from "./components/Home";
 import Contact from "./components/Contact";
@@ -23,25 +23,55 @@ import 'react-toastify/dist/ReactToastify.css';
 import Marketplace from "./Pages/Marketplace";
 import SearchResult from './Pages/SearchResult';
 import Profile from './Pages/CProfile'
-import Calc from  './Pages/Calculators'
+import Calc from './Pages/Calculators'
 // import { useContext, useReducer } from 'react';
 // import {reducer, initialState} from '../reducer/UserReducer'
 import axios from 'axios'
 import Dbne from "./Pages/dbne";
 import CODB from "./Pages/CODB";
+import Wallet from "./Pages/Wallet"
+
 
 
 function App() {
   // const [state, dispatch] = useReducer(reducer, initialState);
   const [role, setRole] = useState("visitor");
+  // const [msg, setmsg] = useState('');
+  const [cook, setCook] = useState('');
+
   const getRole = async () => {
     const c = await axios.get('/getrole', {
       withCredentials: true
     });
     setRole(c.data.role)
   }
+  const getCookie = async () => {
+    const cookie = await axios.get('/getcookie', { withCredentials: true });
+    console.log(cookie.data);
+    setCook(cookie.data);
+    console.log(cookie.data);
+  }
+
+  const InitializeSetup = async () => {
+    console.log("Inside InitializeSetup")
+    let SubtractJob = '';
+    if (cook.inv_man && cook.inv_man.role) {
+      SubtractJob = await axios.get('/initialize-tasks', {
+        withCredentials: true
+      });
+    }
+
+    // setmsg(SubtractJob.data.msg);
+
+  }
+
+
+
   useEffect(() => {
     getRole()
+    getCookie()
+    InitializeSetup()
+
   }, [])
   return (
     <>
@@ -66,12 +96,15 @@ function App() {
         <>
           <Navbar details={{ role, setRole }} />
           <Routes>
-            <Route path="/profile" element={< Profile/>} />
+            <Route path="/profile" element={< Profile />} />
             {/* <Route path="/Dashboard" element={<Dashboard />} /> */}
             <Route path="/Blogs" element={<Blogs />} />
             <Route path="/MCQ" element={<MCQ />} />
             <Route path="/Calc" element={<Calc />} />
             <Route path="/dbne" element={<Dbne />} />
+            <Route path="/wallet" element={<Wallet />} />
+
+
 
 
             <Route path="*" element={<NotFound />} />

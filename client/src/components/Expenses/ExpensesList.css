@@ -1,0 +1,15 @@
+.expenses-list {
+  list-style: none;
+  margin-top: 15px;
+  padding-left: 0rem;
+  /* max-width: 51rem;
+  border-radius: 1rem; */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.expenses-list__fallback {
+  color: white;
+  text-align: center;
+}
